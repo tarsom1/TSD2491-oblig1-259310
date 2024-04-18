@@ -7,6 +7,7 @@ namespace TSD2491_oblig1_259310.Models
     public class MatchinggameModel
     {
         public int MatchesFound { get; private set; }
+        public string GameStatus { get; set; }
         public List<string> ShuffledEmoji { get; private set; }
         private string LastAnimalFound = string.Empty;
         private string LastDescription = string.Empty;
@@ -62,6 +63,10 @@ namespace TSD2491_oblig1_259310.Models
 
         public void ButtonClick(string animal, string animalDescription)
         {
+            if (MatchesFound == 0)
+            {
+                GameStatus = "Game Running";
+            }
             if (LastAnimalFound == string.Empty)
             {
                 LastAnimalFound = animal;
@@ -75,6 +80,7 @@ namespace TSD2491_oblig1_259310.Models
                 MatchesFound++;
                 if (MatchesFound == 8)
                 {
+                    GameStatus = "Game Complete";
                     SetUpGame();
                 }
             }

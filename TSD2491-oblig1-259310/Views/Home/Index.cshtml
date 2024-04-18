@@ -40,4 +40,14 @@
         </div>
 
     </div>
-
+<div class="row">
+    <h2>Match Found: @Model.MatchesFound</h2>
+    @if (Model.GameStatus == "Game Running")
+    {
+        <h3>Game Status: @Model.GameStatus</h3>
+    }
+    else if (Model.GameStatus == "Game Complete")
+    {
+        <h3>Game Status: @Model.GameStatus</h3>
+    }
+</div>

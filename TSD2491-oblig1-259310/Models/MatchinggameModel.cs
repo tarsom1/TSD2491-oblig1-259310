@@ -46,6 +46,29 @@ namespace TSD2491_oblig1_259310.Models
             LastDescription = string.Empty;
         }
 
-       
+        public void ButtonClick(string animal, string animalDescription)
+        {
+            if (LastAnimalFound == string.Empty)
+            {
+                LastAnimalFound = animal;
+                LastDescription = animalDescription;
+            }
+            else if (LastAnimalFound == animal && LastDescription != animalDescription)
+            {
+                LastAnimalFound = string.Empty;
+                LastDescription = string.Empty;
+                ShuffledEmoji = ShuffledEmoji.Select(a => a == animal ? string.Empty : a).ToList();
+                MatchesFound++;
+                if (MatchesFound == 8)
+                {
+                    SetUpGame();
+                }
+            }
+            else
+            {
+                LastAnimalFound = string.Empty;
+                LastDescription = string.Empty;
+            }
+        }
     }
 }

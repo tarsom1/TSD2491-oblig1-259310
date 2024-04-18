@@ -20,6 +20,11 @@ namespace TSD2491_oblig1_259310.Controllers
 			return View(_matchingGameModels);
 		}
 
-       
+        [HttpPost]
+        public IActionResult ButtonClick(string animal, string description)
+        {
+            _matchingGameModels.ButtonClick(animal, description);
+            return View("Index", _matchingGameModels);
+        }
 	}
 }

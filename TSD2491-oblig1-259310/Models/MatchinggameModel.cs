@@ -24,6 +24,12 @@ namespace TSD2491_oblig1_259310.Models
             "🛺", "🛺", "🛻", "🛻", "🚌", "🚌",
             "🚐", "🚐", "🚒", "🚒"
         };
+        private List<string> fruitEmoji = new List<string>()
+        {
+            "🍏", "🍏", "🍎", "🍎", "🍐", "🍐",
+            "🍊", "🍊", "🍋", "🍋", "🍌", "🍌",
+            "🍉", "🍉", "🍇", "🍇"
+        };
 
         private static Random random = new Random();
 
@@ -34,7 +40,15 @@ namespace TSD2491_oblig1_259310.Models
 
         private List<string> PickRandomEmoji()
         {
-            var emojiList = (random.Next(0, 2) == 0) ? animalEmoji : carEmoji;
+            int listChoice = random.Next(0, 3);  // Now picks a number between 0 and 2
+            List<string> emojiList;
+            if (listChoice == 0)
+                emojiList = animalEmoji;
+            else if (listChoice == 1)
+                emojiList = carEmoji;
+            else
+                emojiList = fruitEmoji;
+
             return new List<string>(emojiList.OrderBy(e => random.Next()));
         }
 

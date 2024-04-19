@@ -19,7 +19,12 @@ namespace TSD2491_oblig1_259310.Controllers
 		{
 			return View(_matchingGameModels);
 		}
-
+        [HttpPost]
+        public IActionResult RegisterUser(string username)
+        {
+            _matchingGameModels.RegisterUser(username);
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public IActionResult ButtonClick(string animal, string description)
         {

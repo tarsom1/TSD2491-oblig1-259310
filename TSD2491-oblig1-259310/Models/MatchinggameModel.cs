@@ -8,6 +8,11 @@ namespace TSD2491_oblig1_259310.Models
     {
         public int MatchesFound { get; private set; }
         public string GameStatus { get; set; }
+        public List<User> Users { get; private set; } = new List<User>();
+
+        public string CurrentUsername { get; private set; }
+
+
         public List<string> ShuffledEmoji { get; private set; }
         private string LastAnimalFound = string.Empty;
         private string LastDescription = string.Empty;
@@ -63,6 +68,8 @@ namespace TSD2491_oblig1_259310.Models
 
         public void ButtonClick(string animal, string animalDescription)
         {
+            if (CurrentUsername == null)
+                return;
             if (MatchesFound == 0)
             {
                 GameStatus = "Game Running";
@@ -82,6 +89,11 @@ namespace TSD2491_oblig1_259310.Models
                 {
                     GameStatus = "Game Complete";
                     SetUpGame();
+                    if (CurrentUsername != null)
+                    {
+                        UpdateGamesPlayed(CurrentUsername);
+                    }
+
                 }
             }
             else
@@ -90,5 +102,32 @@ namespace TSD2491_oblig1_259310.Models
                 LastDescription = string.Empty;
             }
         }
+        public void RegisterUser(string username)
+        {
+            if (!Users.Any(u => u.Username == username))
+            {
+                Users.Add(new User { Username = username, GamesPlayed = 0 });
+            }
+
+            CurrentUsername = username;
+
+        }
+
+        
+        public void UpdateGamesPlayed(string username)
+        {
+            var user = Users.FirstOrDefault(u => u.Username == username);
+            if (user != null)
+            {
+                user.GamesPlayed++;
+            }
+        }
+    }
+    public class User
+    {
+        public string Username { get; set; }
+        public int GamesPlayed { get; set; }
     }
 }
+
+
